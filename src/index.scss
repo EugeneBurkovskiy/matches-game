@@ -73,3 +73,9 @@ h6 {
   font-size: inherit;
   font-weight: 400;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
