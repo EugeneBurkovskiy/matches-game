@@ -1,0 +1,14 @@
+@import "../../../theme/variables";
+
+.button {
+  font-size: 1.2rem;
+  background-color: $blue;
+  color: $fontColor;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 100px;
+  transition: all $transitionTime;
+  &:hover {
+    background-color: $blueLight;
+  }
+}

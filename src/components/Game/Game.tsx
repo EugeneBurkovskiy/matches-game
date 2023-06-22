@@ -24,8 +24,8 @@ const Game = () => {
     <Container>
       <article className={styles.game}>
         <AIBoard active={!playerTurnStatus} />
-        <GameField />
-        <HumanBoard active={playerTurnStatus} />
+        <GameField active={playerTurnStatus} />
+        <HumanBoard active={playerTurnStatus} setTurnStatus={setPlayerTurnStatus} />
       </article>
     </Container>
   );

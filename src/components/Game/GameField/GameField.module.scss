@@ -1,4 +1,4 @@
-@import '../../../theme/variables';
+@import "../../../theme/variables";
 
 .field {
   &__title {
@@ -8,6 +8,7 @@
   }
   &__matches {
     display: flex;
+    justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
   }
@@ -16,6 +17,12 @@
     transition: all $transitionTime;
     &:hover {
       transform: scale(1.1);
+    }
+  }
+  &__disabled {
+    cursor: default;
+    &:hover {
+      transform: none;
     }
   }
 }
