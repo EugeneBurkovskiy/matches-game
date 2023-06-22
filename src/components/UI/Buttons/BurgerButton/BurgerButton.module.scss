@@ -1,0 +1,16 @@
+@import '../../../../theme/variables';
+
+.button {
+  color: $fontColor;
+  font-size: 2rem;
+  font-weight: 900;
+  transition: all $transitionTime;
+}
+
+@media (min-width: 768px) {
+  .button {
+    &:hover {
+      color: $yellow;
+    }
+  }
+}

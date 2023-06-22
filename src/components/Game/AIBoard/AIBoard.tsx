@@ -1,21 +1,20 @@
 import { useMatchesCount } from '../../../store/matchesStore';
+import { EPlayer, usePlayers } from '../../../store/playersStore';
 import { Avatar } from '../../UI/Avatar/Avatar';
 import { MatchesCountBoard } from '../GameUI/MatchesCountBoard/MatchesCountBoard';
 import { PlayerWrapper } from '../GameUI/PlayerWrapper/PlayerWrapper';
 
 import styles from './AIBoard.module.scss';
 
-interface IProps {
-  active: boolean;
-}
-
-const AIBoard = ({ active }: IProps) => {
+const AIBoard = () => {
   const { AIMatchesCount } = useMatchesCount();
+  const { currentPlayer } = usePlayers();
+  const isActive = currentPlayer === EPlayer.AI;
 
   return (
     <section className={styles.player}>
       <MatchesCountBoard count={AIMatchesCount} />
-      <PlayerWrapper active={active}>
+      <PlayerWrapper active={isActive}>
         <Avatar avatar="🤖" />
       </PlayerWrapper>
     </section>
