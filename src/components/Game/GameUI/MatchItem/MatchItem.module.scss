@@ -1,0 +1,23 @@
+@import '../../../../theme/variables';
+
+.match {
+  position: relative;
+  background-color: $yellow;
+  height: 100px;
+  width: 8px;
+  &::before {
+    content: '';
+    background-color: $red;
+    height: 10px;
+    width: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .match {
+    height: 70px;
+  }
+}
