@@ -1,0 +1,10 @@
+@import '../../../theme/variables';
+
+.error {
+  color: $lightRed;
+  text-align: center;
+  &__message {
+    font-weight: 700;
+    margin-top: 10px;
+  }
+}

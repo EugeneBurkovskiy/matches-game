@@ -23,6 +23,7 @@ const Game = () => {
     playerMatchesCount,
     AIMatchesCount,
     totalMathesCount,
+    maxMatchesPerTurn,
     setLeftMatchesCount,
     resetCounters,
   } = useMatchesCount();
@@ -40,7 +41,7 @@ const Game = () => {
 
   useEffect(() => {
     resetCounters();
-  }, [initialPlayer, resetCounters]);
+  }, [initialPlayer, totalMathesCount, maxMatchesPerTurn, resetCounters]);
 
   useEffect(() => {
     if (finishGame) {

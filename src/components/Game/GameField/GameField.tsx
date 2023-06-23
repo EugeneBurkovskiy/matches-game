@@ -6,7 +6,6 @@ import { useMatchesCount } from '../../../store/matchesStore';
 import { EPlayer, usePlayers } from '../../../store/playersStore';
 
 import { generateMatchesArr } from '../../../utils/generateMatchesArr';
-import { MAX_MATCHES_PER_TURN } from '../../../utils/variables';
 
 import styles from './GameField.module.scss';
 
@@ -15,6 +14,7 @@ const GameField = () => {
     leftMathesCount,
     currentTurnMatchesCount,
     totalMathesCount,
+    maxMatchesPerTurn,
     incrCurrentTurnMatchesCount,
   } = useMatchesCount();
 
@@ -25,19 +25,17 @@ const GameField = () => {
 
   useEffect(() => {
     setMatches((prev) => {
-      const removedMatchesCount = prev.length - leftMathesCount;
-      if (prev.length) {
-        return prev.slice(removedMatchesCount);
+      if (totalMathesCount === leftMathesCount || leftMathesCount === 0) {
+        return generateMatchesArr(totalMathesCount);
       }
-      return generateMatchesArr(totalMathesCount);
+      const removedMatchesCount = prev.length - leftMathesCount;
+
+      return prev.slice(removedMatchesCount);
     });
   }, [leftMathesCount, totalMathesCount]);
 
   const handleClick = () => {
-    if (
-      currentTurnMatchesCount < MAX_MATCHES_PER_TURN &&
-      currentTurnMatchesCount < leftMathesCount
-    ) {
+    if (currentTurnMatchesCount < maxMatchesPerTurn && currentTurnMatchesCount < leftMathesCount) {
       incrCurrentTurnMatchesCount(1);
     }
   };

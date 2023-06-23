@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
-export type playerType = 'human' | 'AI';
+export type playerType = 'Human' | 'AI';
 
 export enum EPlayer {
-  human = 'human',
+  human = 'Human',
   AI = 'AI',
 }
 
