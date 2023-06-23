@@ -11,15 +11,20 @@
   z-index: 100;
   transition: all $transitionTime;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   color: $fontColor;
+  padding: 70px 20px;
+  overflow-y: auto;
 
   &__content {
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 20px;
     width: 100%;
+    background-color: $blueLight;
+    padding: 20px;
+    border-radius: 20px;
   }
 
   &__title {

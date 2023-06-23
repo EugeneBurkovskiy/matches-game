@@ -1,9 +1,9 @@
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { Game } from './components/Game/Game';
+import { Container } from './components/UI/Container/Container';
 
 import styles from './App.module.scss';
-import { Container } from './components/UI/Container/Container';
 
 function App() {
   return (

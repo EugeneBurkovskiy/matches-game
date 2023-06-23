@@ -8,8 +8,8 @@ import styles from './Header.module.scss';
 const Header = () => {
   const [showBurger, setShowBurger] = useState(false);
 
-  const openMenu = () => {
-    setShowBurger(true);
+  const toggleMenu = () => {
+    setShowBurger((prev) => !prev);
   };
   const closeMenu = () => {
     setShowBurger(false);
@@ -20,7 +20,7 @@ const Header = () => {
       <Container>
         <div className={styles.header__wrapper}>
           <h1 className={styles.header__title}>Matches Game</h1>
-          <BurgerButton onClick={openMenu} />
+          <BurgerButton onClick={toggleMenu} />
         </div>
         <Options closeFunc={closeMenu} active={showBurger} />
       </Container>

@@ -16,14 +16,16 @@ interface IProps {
 }
 
 const AIBoard = ({ setFinishGame }: IProps) => {
-  const { AIMatchesCount, leftMathesCount, incrAIMatchesCount } = useMatchesCount();
+  const { AIMatchesCount, leftMathesCount, incrAIMatchesCount, maxMatchesPerTurn } =
+    useMatchesCount();
+
   const { currentPlayer, setCurrentPlayer } = usePlayers();
 
   const isActive = useMemo(() => currentPlayer === EPlayer.AI, [currentPlayer]);
 
   const handleTake = useCallback(() => {
     if (leftMathesCount) {
-      const AIPickCount = generateAIMatchesPickCount();
+      const AIPickCount = generateAIMatchesPickCount(leftMathesCount, maxMatchesPerTurn);
       incrAIMatchesCount(AIPickCount);
       if (AIPickCount === leftMathesCount) {
         setFinishGame(true);
@@ -31,7 +33,7 @@ const AIBoard = ({ setFinishGame }: IProps) => {
         setCurrentPlayer(EPlayer.human);
       }
     }
-  }, [incrAIMatchesCount, leftMathesCount, setCurrentPlayer, setFinishGame]);
+  }, [incrAIMatchesCount, leftMathesCount, maxMatchesPerTurn, setCurrentPlayer, setFinishGame]);
 
   useEffect(() => {
     if (isActive) {

@@ -1,0 +1,14 @@
+@import '../../theme/variables';
+.instructions {
+  background-color: $blueLight;
+  padding: 20px;
+  border-radius: 20px;
+  &__title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  &__text {
+    text-align: justify;
+  }
+}

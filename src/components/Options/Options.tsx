@@ -4,8 +4,10 @@ import { CloseButton } from '../UI';
 import { SelectPlayer } from './SelectPlayer/SelectPlayer';
 import { OptionsInput } from './OptionsInput/OptionsInput';
 import { DEFAULT_MAX_MATCHES_PER_TURN, DEFAULT_TOTAL_MATCHES_NUMBER } from '../../utils/variables';
-import { useMatchesCount } from '../../store/matchesStore';
 import { OptionsError } from './OptionsError/OptionsError';
+import { GameInstructions } from '../GameInstructions/GameInstructions';
+
+import { useMatchesCount } from '../../store/matchesStore';
 
 import styles from './Options.module.scss';
 
@@ -22,7 +24,7 @@ const Options = ({ active, closeFunc }: IProps) => {
   const handleTotalMatches = useCallback(
     (value: string) => {
       const numValue = +value * 2 + 1;
-      if (numValue % 2 !== 0 && numValue > maxMatchesPerTurn) {
+      if (numValue % 2 !== 0 && numValue > maxMatchesPerTurn && numValue) {
         setTotalMatchesCount(numValue);
         setError('');
       } else {
@@ -35,7 +37,7 @@ const Options = ({ active, closeFunc }: IProps) => {
   const handleMaxTurns = useCallback(
     (value: string) => {
       const numValue = +value;
-      if (numValue <= totalMathesCount / 3) {
+      if (numValue <= totalMathesCount / 3 && numValue) {
         setMaxMatchesPerTurn(numValue);
         setError('');
       } else {
@@ -65,6 +67,7 @@ const Options = ({ active, closeFunc }: IProps) => {
         />
         {error && <OptionsError text={error} />}
       </div>
+      <GameInstructions />
     </nav>
   );
 };
