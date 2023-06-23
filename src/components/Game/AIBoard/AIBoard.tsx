@@ -1,15 +1,44 @@
+import { useCallback, useEffect, useMemo } from 'react';
+
+import { Avatar } from '../../UI';
+import { MatchesCountBoard, PlayerWrapper } from '../GameUI';
+
 import { useMatchesCount } from '../../../store/matchesStore';
 import { EPlayer, usePlayers } from '../../../store/playersStore';
-import { Avatar } from '../../UI/Avatar/Avatar';
-import { MatchesCountBoard } from '../GameUI/MatchesCountBoard/MatchesCountBoard';
-import { PlayerWrapper } from '../GameUI/PlayerWrapper/PlayerWrapper';
+
+import { generateAIMatchesPickCount } from '../../../utils/generateAIMatchesPickCount';
+import { AI_TURN_TIME } from '../../../utils/variables';
 
 import styles from './AIBoard.module.scss';
 
-const AIBoard = () => {
-  const { AIMatchesCount } = useMatchesCount();
-  const { currentPlayer } = usePlayers();
-  const isActive = currentPlayer === EPlayer.AI;
+interface IProps {
+  setFinishGame: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AIBoard = ({ setFinishGame }: IProps) => {
+  const { AIMatchesCount, leftMathesCount, incrAIMatchesCount } = useMatchesCount();
+  const { currentPlayer, setCurrentPlayer } = usePlayers();
+
+  const isActive = useMemo(() => currentPlayer === EPlayer.AI, [currentPlayer]);
+
+  const handleTake = useCallback(() => {
+    if (leftMathesCount) {
+      const AIPickCount = generateAIMatchesPickCount();
+      incrAIMatchesCount(AIPickCount);
+      if (AIPickCount === leftMathesCount) {
+        setFinishGame(true);
+      } else {
+        setCurrentPlayer(EPlayer.human);
+      }
+    }
+  }, [incrAIMatchesCount, leftMathesCount, setCurrentPlayer, setFinishGame]);
+
+  useEffect(() => {
+    if (isActive) {
+      const timer = setTimeout(handleTake, AI_TURN_TIME);
+      return () => clearTimeout(timer);
+    }
+  }, [handleTake, incrAIMatchesCount, isActive, setCurrentPlayer]);
 
   return (
     <section className={styles.player}>

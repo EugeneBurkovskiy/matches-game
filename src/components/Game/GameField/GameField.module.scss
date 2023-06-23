@@ -19,9 +19,6 @@
   &__disabled {
     cursor: default;
     pointer-events: none;
-    &:hover {
-      transform: none;
-    }
   }
 }
 

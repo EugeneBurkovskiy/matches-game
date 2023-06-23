@@ -16,3 +16,10 @@
   border-color: $green;
   background-color: $greenHalfTransparent;
 }
+
+@media (max-height: 700px) {
+  .wrapper {
+    height: 80px;
+    width: 80px;
+  }
+}

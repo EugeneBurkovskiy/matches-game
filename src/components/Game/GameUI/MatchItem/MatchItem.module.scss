@@ -21,3 +21,9 @@
     height: 70px;
   }
 }
+
+@media (max-height: 700px) {
+  .match {
+    height: 30px;
+  }
+}

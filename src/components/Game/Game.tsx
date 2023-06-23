@@ -4,23 +4,34 @@ import { AIBoard } from './AIBoard/AIBoard';
 import { GameField } from './GameField/GameField';
 import { HumanBoard } from './HumanBoard/HumanBoard';
 
+import { ModalWindow } from '../UI';
+
 import { useMatchesCount } from '../../store/matchesStore';
-import { getWinner } from '../../utils/getWinner';
-import { ModalWindow } from '../UI/ModalWindow/ModalWindow';
+import { usePlayers } from '../../store/playersStore';
+
+import { MODAL_WINDOW_TIME } from '../../utils/variables';
 
 import styles from './Game.module.scss';
+
+enum EFinalPhrase {
+  win = 'You win !',
+  lose = 'You lose :(',
+}
 
 const Game = () => {
   const {
     playerMatchesCount,
     AIMatchesCount,
     totalMathesCount,
-    leftMathesCount,
     setLeftMatchesCount,
     resetCounters,
   } = useMatchesCount();
 
-  const [winnerPhrase, setwinnerPhrase] = useState<string>('');
+  const [finishGame, setFinishGame] = useState(false);
+
+  const { initialPlayer, setCurrentPlayer } = usePlayers();
+
+  const finalPhrase = AIMatchesCount % 2 === 0 ? EFinalPhrase.lose : EFinalPhrase.win;
 
   useEffect(() => {
     const calculatedLeftMatchesCount = totalMathesCount - (playerMatchesCount + AIMatchesCount);
@@ -28,20 +39,26 @@ const Game = () => {
   }, [playerMatchesCount, AIMatchesCount, totalMathesCount, setLeftMatchesCount]);
 
   useEffect(() => {
-    if (leftMathesCount === 0) {
-      const phrase = getWinner(AIMatchesCount);
-      setwinnerPhrase(phrase);
-      setTimeout(() => setwinnerPhrase(''), 2000);
-      resetCounters();
+    resetCounters();
+  }, [initialPlayer, resetCounters]);
+
+  useEffect(() => {
+    if (finishGame) {
+      const timer = setTimeout(() => {
+        setFinishGame(false);
+        resetCounters();
+        setCurrentPlayer(initialPlayer);
+      }, MODAL_WINDOW_TIME);
+      return () => clearTimeout(timer);
     }
-  }, [AIMatchesCount, leftMathesCount, resetCounters]);
+  }, [finishGame, initialPlayer, resetCounters, setCurrentPlayer]);
 
   return (
     <article className={styles.game}>
-      <AIBoard />
+      <AIBoard setFinishGame={setFinishGame} />
       <GameField />
-      <HumanBoard />
-      {winnerPhrase && <ModalWindow text={winnerPhrase} />}
+      <HumanBoard setFinishGame={setFinishGame} />
+      {finishGame && <ModalWindow text={finalPhrase} />}
     </article>
   );
 };

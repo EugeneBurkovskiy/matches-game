@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import { Options } from '../Options/Options';
-import { BurgerButton } from '../UI/Buttons/BurgerButton/BurgerButton';
-import { Container } from '../UI/Container/Container';
+import { BurgerButton, Container } from '../UI';
 
 import styles from './Header.module.scss';
 
@@ -19,7 +18,10 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Container>
-        <BurgerButton onClick={openMenu} />
+        <div className={styles.header__wrapper}>
+          <h1 className={styles.header__title}>Matches Game</h1>
+          <BurgerButton onClick={openMenu} />
+        </div>
         <Options closeFunc={closeMenu} active={showBurger} />
       </Container>
     </header>

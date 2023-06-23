@@ -9,6 +9,7 @@ export enum EPlayer {
 
 interface IPlayer {
   initialPlayer: playerType;
+  secondPlayer: playerType;
   currentPlayer: playerType;
   setInitialPlayer: (player: playerType) => void;
   setCurrentPlayer: (player: playerType) => void;
@@ -16,9 +17,16 @@ interface IPlayer {
 
 const usePlayers = create<IPlayer>((set) => ({
   initialPlayer: EPlayer.human,
+  secondPlayer: EPlayer.AI,
   currentPlayer: EPlayer.human,
-  setInitialPlayer: (player) => set({ currentPlayer: player }),
   setCurrentPlayer: (player) => set({ currentPlayer: player }),
+  setInitialPlayer: (player) => {
+    if (player === EPlayer.human) {
+      set({ initialPlayer: EPlayer.human, currentPlayer: EPlayer.human, secondPlayer: EPlayer.AI });
+    } else {
+      set({ initialPlayer: EPlayer.AI, currentPlayer: EPlayer.AI, secondPlayer: EPlayer.human });
+    }
+  },
 }));
 
 export { usePlayers };

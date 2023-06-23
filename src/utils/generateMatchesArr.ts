@@ -1,5 +1,7 @@
+import { nanoid } from 'nanoid';
+
 const generateMatchesArr = (count: number) => {
-  return [...Array(count)].map((_, index) => index + 1);
+  return [...Array(count)].map(() => nanoid());
 };
 
 export { generateMatchesArr };

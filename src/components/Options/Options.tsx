@@ -1,4 +1,4 @@
-import { CloseButton } from '../UI/Buttons/CloseButton/CloseButton';
+import { CloseButton } from '../UI';
 import { SelectPlayer } from './SelectPlayer/SelectPlayer';
 
 import styles from './Options.module.scss';

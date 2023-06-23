@@ -3,7 +3,7 @@
 .options {
   font-size: 1.2rem;
   position: fixed;
-  left: -100%;
+  right: -100%;
   top: 0;
   width: 320px;
   height: 100%;
@@ -27,11 +27,11 @@
   }
   &__button {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 10px;
+    top: 10px;
   }
 }
 
 .show {
-  left: 0;
+  right: 0;
 }

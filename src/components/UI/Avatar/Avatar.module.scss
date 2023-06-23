@@ -2,6 +2,15 @@
   font-size: 3rem;
   width: 70px;
   height: 70px;
-  text-align: center;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-height: 700px) {
+  .avatar {
+    height: 50px;
+    width: 50px;
+  }
 }
