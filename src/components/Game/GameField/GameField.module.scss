@@ -13,6 +13,7 @@
     flex-wrap: wrap;
     overflow-y: auto;
     padding: 20px;
+    max-height: 30vh;
   }
   &__match {
     cursor: grab;
