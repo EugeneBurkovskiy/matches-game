@@ -29,7 +29,7 @@
   .field {
     &__match {
       &:hover {
-        transform: scale(1.1);
+        box-shadow: $greenShadow;
       }
     }
   }
