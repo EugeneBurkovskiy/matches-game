@@ -47,10 +47,12 @@ const Game = () => {
     if (finishGame) {
       const timer = setTimeout(() => {
         setFinishGame(false);
-        resetCounters();
         setCurrentPlayer(initialPlayer);
       }, MODAL_WINDOW_TIME);
-      return () => clearTimeout(timer);
+      return () => {
+        resetCounters();
+        clearTimeout(timer);
+      };
     }
   }, [finishGame, initialPlayer, resetCounters, setCurrentPlayer]);
 
