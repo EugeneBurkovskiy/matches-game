@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import styles from './OptionsInput.module.scss';
 
@@ -9,7 +9,7 @@ interface IProps {
   id?: string;
 }
 
-const OptionsInput = ({ title, onChange, defaultValue, id }: IProps) => {
+const OptionsInput = memo(({ title, onChange, defaultValue, id }: IProps) => {
   const [value, setValue] = useState(defaultValue || '');
 
   useEffect(() => {
@@ -28,6 +28,6 @@ const OptionsInput = ({ title, onChange, defaultValue, id }: IProps) => {
       />
     </label>
   );
-};
+});
 
 export { OptionsInput };
