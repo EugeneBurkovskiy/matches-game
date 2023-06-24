@@ -1,11 +1,21 @@
-const generateAIMatchesPickCount = (leftMathesCount: number, maxMatchesPerTurn: number) => {
-  for (let i = 1; i <= maxMatchesPerTurn; i++) {
-    if ((leftMathesCount - i) % (maxMatchesPerTurn + 1) === 0) {
-      return i;
-    }
+const generateAIMatchesPickCount = (
+  leftMatchesCount: number,
+  maxMatchesPerTurn: number,
+  AIMatchesCount: number
+) => {
+  const evenLeftMatchesCount = leftMatchesCount % 2 === 0;
+  if (AIMatchesCount % 2 !== 0) {
+    return 1;
   }
-
-  return Math.ceil(Math.random() * maxMatchesPerTurn);
+  if (evenLeftMatchesCount) {
+    if (leftMatchesCount === maxMatchesPerTurn) {
+      return maxMatchesPerTurn;
+    } else if (leftMatchesCount < maxMatchesPerTurn) {
+      return leftMatchesCount;
+    }
+    return 2;
+  }
+  return 1;
 };
 
 export { generateAIMatchesPickCount };

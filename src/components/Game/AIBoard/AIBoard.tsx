@@ -25,7 +25,11 @@ const AIBoard = ({ setFinishGame }: IProps) => {
 
   const handleTake = useCallback(() => {
     if (leftMathesCount) {
-      const AIPickCount = generateAIMatchesPickCount(leftMathesCount, maxMatchesPerTurn);
+      const AIPickCount = generateAIMatchesPickCount(
+        leftMathesCount,
+        maxMatchesPerTurn,
+        AIMatchesCount
+      );
       incrAIMatchesCount(AIPickCount);
       if (AIPickCount === leftMathesCount) {
         setFinishGame(true);
@@ -33,7 +37,14 @@ const AIBoard = ({ setFinishGame }: IProps) => {
         setCurrentPlayer(EPlayer.human);
       }
     }
-  }, [incrAIMatchesCount, leftMathesCount, maxMatchesPerTurn, setCurrentPlayer, setFinishGame]);
+  }, [
+    AIMatchesCount,
+    incrAIMatchesCount,
+    leftMathesCount,
+    maxMatchesPerTurn,
+    setCurrentPlayer,
+    setFinishGame,
+  ]);
 
   useEffect(() => {
     if (isActive) {
